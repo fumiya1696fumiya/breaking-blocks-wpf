@@ -18,4 +18,4 @@ WPFを使用して作成したブロック崩しゲームです。
 - MVVMパターンを意識して、Viewとロジックを分離した
 
 ##画面
-<img width="500" height="500" alt="Image" src="https://github.com/user-attachments/assets/c9ceadc5-3c23-4fdd-b364-ae1f62a47dd4" />
+<img width="500" height="500" alt="Image" src="images/Block_Breaking.png" />
