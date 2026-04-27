@@ -1,0 +1,56 @@
+﻿<Window x:Class="Breaking_Blocks.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Breaking_Blocks" xmlns:models="clr-namespace:Breaking_Blocks.Models" d:DataContext="{d:DesignInstance Type=models:Paddle}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="700"
+        KeyDown="Window_KeyDown"
+        KeyUp="Window_KeyUp"
+        Focusable="true"
+        FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}">
+    <Canvas x:Name="GameCanvas">
+        <!-- パドルの表示 -->
+        <Rectangle Width="{Binding Paddle.Width}" Height="{Binding Paddle.Height}" Fill="Blue" Canvas.Left="{Binding Paddle.X}" Canvas.Top="{Binding Paddle.Y}"/>
+        <!-- ブロックの表示 -->
+        <ItemsControl ItemsSource="{Binding Blocks}">
+            <!-- 個々のブロックをキャンバス上に自由配置でき、座標が使える -->
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <!-- 各ブロックの座標を指定 -->
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.Left" Value="{Binding X}" />
+                    <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <!-- ブロックをRectangleとして描くテンプレート -->
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Width="{Binding Width}"
+                               Height="{Binding Height}"
+                               Fill="Red"
+                           />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!-- ボールの表示 -->
+        <Ellipse Width="{Binding Ball.Width}"
+                 Height="{Binding Ball.Height}"
+                 Fill="Green"
+                 Canvas.Left="{Binding Ball.X}"
+                 Canvas.Top="{Binding Ball.Y}"/>
+        <!-- ゲーム終了時のテキスト表示 -->
+        <TextBlock Canvas.Left="150" Canvas.Top="510"
+                   Width="400" Height="60" FontSize="40" TextAlignment="Center"
+                   Text="{Binding TotalScore}"/>
+        <TextBlock Canvas.Left="90" Canvas.Top="560"
+                   Width="550" Height="110" FontSize="40" TextAlignment="Center"
+                   Text="{Binding GameSet}"/>
+        
+    </Canvas>
+</Window>
